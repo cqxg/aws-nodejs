@@ -1,0 +1,47 @@
+service: product-service
+# app and org for use with dashboard.serverless.com
+# app: rs-aws-shop-be
+# org: rs-school
+
+frameworkVersion: "3"
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  serverless-auto-swagger:
+    apiType: "httpApi"
+    generateSwaggerOnDeploy: true
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-auto-swagger
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-west-1
+  httpApi:
+    cors:
+      allowedOrigins:
+        - "*"
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+functions:
+  getProductsList:
+    handler: getProductsList.getProductsList
+    events:
+      - httpApi:
+          path: /products
+          method: get
+  getProductsById:
+    handler: getProductsById.getProductsById
+    events:
+      - httpApi:
+          path: /products/{productId}
+          method: get
