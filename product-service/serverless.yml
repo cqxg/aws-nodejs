@@ -21,6 +21,12 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  environment:
+    PG_HOST: PG__HOST
+    PG_PORT: PG__PORT
+    PG_DATABASE: PG__DATABASE
+    PG_USERNAME: PG__USERNAME
+    PG_PASSWORD: PG__PASSWORD
   stage: dev
   region: eu-west-1
   httpApi:
@@ -33,6 +39,8 @@ provider:
       allowedMethods:
         - GET
 functions:
+  connectToDb:
+    handler: pg-client-lambda.invoke
   getProductsList:
     handler: getProductsList.getProductsList
     events:
@@ -45,3 +53,9 @@ functions:
       - httpApi:
           path: /products/{productId}
           method: get
+  postProduct:
+    handler: postProduct.postProduct
+    events:
+      - httpApi:
+          path: /products
+          method: post

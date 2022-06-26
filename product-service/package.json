@@ -13,13 +13,14 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
-    "serverless-webpack": "^5.3.1",
     "jest": "^28.1.1",
+    "serverless-webpack": "^5.3.1",
     "webpack": "^4.35.2"
   },
   "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
   "license": "MIT",
   "dependencies": {
+    "pg": "^8.7.3",
     "serverless-auto-swagger": "^2.5.1"
   }
 }
