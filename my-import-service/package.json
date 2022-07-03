@@ -19,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.18.6",
-    "aws-sdk": "^2.1167.0"
+    "aws-sdk": "^2.1167.0",
+    "csv-parser": "^3.0.0"
   }
 }

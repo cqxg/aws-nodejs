@@ -32,10 +32,19 @@ functions:
   importProductsFile:
     handler: importProductsFile.importProductsFile
     events:
-      - httpApi:
+      - http:
           path: /import
           method: GET
           request:
             parameters:
               querystrings:
                 name: true
+  importFileParser:
+    handler: importFileParser.importFileParser
+    events:
+      - s3:
+          bucket: my-new-import-service
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaded/
+          existing: true

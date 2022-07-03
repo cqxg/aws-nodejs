@@ -17,6 +17,6 @@ export const importProductsFile = async (event) => {
   return {
     statusCode: 201,
     headers: { "Access-Control-Allow-Origin": "*" },
-    body: JSON.stringify(signedUrl, null, 2),
+    body: JSON.stringify(signedUrl),
   };
 };
