@@ -1,7 +1,4 @@
 service: product-service
-# app and org for use with dashboard.serverless.com
-# app: rs-aws-shop-be
-# org: rs-school
 
 frameworkVersion: "3"
 
@@ -14,7 +11,6 @@ custom:
     generateSwaggerOnDeploy: true
     typefiles: ["./src/types/api-types.d.ts"]
 
-# Add the serverless-webpack plugin
 plugins:
   - serverless-auto-swagger
   - serverless-webpack
@@ -24,10 +20,11 @@ provider:
   runtime: nodejs12.x
   environment:
     PG_HOST: PG__HOST
-    PG_PORT: PG__PORT
-    PG_DATABASE: PG__DATABASE
-    PG_USERNAME: PG__USERNAME
-    PG_PASSWORD: PG__PASSWORD
+    PG_PORT: PG_PORT
+    PG_DATABASE: PG_DATABASE
+    PG_USERNAME: PG_USERNAME
+    PG_PASSWORD: PG_PASSWORD
+    SNS_ARN: { Ref: SNSTopic }
   stage: dev
   region: eu-west-1
   httpApi:
@@ -44,6 +41,27 @@ provider:
       Action:
         - "lambda:InvokeFunction"
       Resource: "*"
+    - Effect: "Allow"
+      Action: "sns:*"
+      Resource:
+        Ref: SNSTopic
+
+resources:
+  Resources:
+    SNSTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: product-service-topic-cqxg
+    SNSSubscriptionFiltered:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: ihar.o.ivaniuk@gmail.com
+        Protocol: email
+        TopicArn:
+          Ref: SNSTopic
+        FilterPolicy:
+          image:
+            - "true"
 
 functions:
   connectToDb:
