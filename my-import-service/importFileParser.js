@@ -5,6 +5,7 @@ const BUCKET = "my-new-import-service";
 
 export const importFileParser = async (event) => {
   const s3 = new AWS.S3({ region: "eu-west-1" });
+  const sqs = new AWS.SQS();
 
   for (const record of event.Records) {
     const bucket = s3.getObject({
@@ -16,7 +17,20 @@ export const importFileParser = async (event) => {
       bucket
         .createReadStream()
         .pipe(csv())
-        .on("data", (item) => console.log(item))
+        .on("data", (item) =>
+          sqs.sendMessage(
+            {
+              QueueUrl: process.env.SQS_URL,
+              MessageBody: JSON.stringify(item),
+            },
+            (error, message) => {
+              if (error) {
+                console.log("We'v got some error: ", error);
+              }
+              console.log("Successfully sent message: ", message);
+            }
+          )
+        )
         .on("end", async () => {
           await s3
             .copyObject({

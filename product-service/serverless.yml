@@ -12,7 +12,7 @@ custom:
   serverless-auto-swagger:
     apiType: "httpApi"
     generateSwaggerOnDeploy: true
-    typefiles: ['./src/types/api-types.d.ts']
+    typefiles: ["./src/types/api-types.d.ts"]
 
 # Add the serverless-webpack plugin
 plugins:
@@ -23,11 +23,11 @@ provider:
   name: aws
   runtime: nodejs12.x
   environment:
-    PG_HOST: PG_HOST
-    PG_PORT: PG_PORT
-    PG_DATABASE: PG_DATABASE
-    PG_USERNAME: PG_USERNAME
-    PG_PASSWORD: PG_PASSWORD
+    PG_HOST: PG__HOST
+    PG_PORT: PG__PORT
+    PG_DATABASE: PG__DATABASE
+    PG_USERNAME: PG__USERNAME
+    PG_PASSWORD: PG__PASSWORD
   stage: dev
   region: eu-west-1
   httpApi:
@@ -39,6 +39,12 @@ provider:
         - Authorization
       allowedMethods:
         - GET
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "lambda:InvokeFunction"
+      Resource: "*"
+
 functions:
   connectToDb:
     handler: pg-client-lambda.invoke
@@ -60,4 +66,10 @@ functions:
       - httpApi:
           path: /products
           method: post
-          bodyType: 'PostProductSchema'
+          bodyType: "PostProductSchema"
+  catalogBatchProcess:
+    handler: catalogBatchProcess.catalogBatchProcess
+    events:
+      - sqs:
+          batchSize: 5
+          arn: arn:aws:sqs:eu-west-1:408257343489:my-new-import-service-queue

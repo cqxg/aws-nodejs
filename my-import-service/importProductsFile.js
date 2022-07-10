@@ -24,7 +24,7 @@ export const importProductsFile = async (event) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        message: "Something broken! Sorry. Error: " + error?.message,
+        message: "Something broken! Sorry. Error: " + error,
       }),
     };
   }
