@@ -34,7 +34,17 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body required in the request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostProductSchema"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "200 response"
@@ -69,6 +79,36 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "PostProductSchema": {
+      "properties": {
+        "title": {
+          "title": "PostProductSchema.title",
+          "type": "string"
+        },
+        "description": {
+          "title": "PostProductSchema.description",
+          "type": "string"
+        },
+        "prise": {
+          "title": "PostProductSchema.prise",
+          "type": "number"
+        },
+        "count": {
+          "title": "PostProductSchema.count",
+          "type": "number"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "prise",
+        "count"
+      ],
+      "additionalProperties": false,
+      "title": "PostProductSchema",
+      "type": "object"
+    }
+  },
   "securityDefinitions": {}
 };
