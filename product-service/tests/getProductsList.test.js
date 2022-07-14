@@ -4,7 +4,7 @@ const mockedProducts = [
   {
     count: 1,
     description: "Article: 153117",
-    id: "1",
+    id: "e254a2fe-97ea-491b-bb38-067410d0bda5",
     price: 1337,
     title: "Spike",
     image:
@@ -13,7 +13,7 @@ const mockedProducts = [
   {
     count: 2,
     description: "Article: 241703",
-    id: "2",
+    id: "7bafdc3b-8cc3-4d5e-8d3b-eea01b6d5964",
     price: 69,
     title: "Garibaldi",
     image:
@@ -22,8 +22,8 @@ const mockedProducts = [
   {
     count: 3,
     description: "Article: 228228",
-    id: "3",
-    price: 1000.7,
+    id: "c41db99e-9a13-48ca-bf01-29f88b33139b",
+    price: 1000,
     title: "Python",
     image:
       "https://g5.sunlight.net/media/product/video-crf23-1000/2022/05/16/4381ed9371c8f4a3d8fad0894f7eb68e718ae0a8.mp4",
@@ -32,7 +32,7 @@ const mockedProducts = [
   {
     count: 4,
     description: "Article: 265724",
-    id: "5",
+    id: "f42b5a2d-daed-4fcf-bb0a-65c341b7f1c0",
     price: 2033,
     title: "Rhombus",
     image:
@@ -41,7 +41,7 @@ const mockedProducts = [
   {
     count: 5,
     description: "Article: 151733",
-    id: "6",
+    id: "946bce13-20c7-42bc-b4a6-cd7d28b4fe6e",
     price: 228,
     title: "Anchor",
     image:
@@ -50,7 +50,7 @@ const mockedProducts = [
   {
     count: 6,
     description: "Article: 227922",
-    id: "7",
+    id: "e2810a34-3648-4bd3-a7ff-babcace32e7b",
     price: 911,
     title: "Cartier",
     image:
@@ -59,7 +59,7 @@ const mockedProducts = [
   {
     count: 7,
     description: "Article: 710637",
-    id: "8",
+    id: "41bb1cb8-8c98-47ec-81c3-0630b45ac7a9",
     price: 84,
     title: "Perlina",
     image:
@@ -68,7 +68,7 @@ const mockedProducts = [
   {
     count: 8,
     description: "Article: 223637",
-    id: "8",
+    id: "1f2985c9-7cd8-4901-9ed2-b13b62fdca3f",
     price: 834,
     title: "Wire",
     image:

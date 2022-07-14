@@ -2,7 +2,7 @@ import { getProductsById } from "../getProductsById";
 
 const mockedEventWithExistingId = {
   pathParameters: {
-    productId: "1",
+    productId: "c41db99e-9a13-48ca-bf01-29f88b33139b",
   },
 };
 
