@@ -1,10 +1,7 @@
 service: my-new-import-service
-# app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
+
 frameworkVersion: "3"
 
-# Add the serverless-webpack plugin
 plugins:
   - serverless-webpack
 
@@ -13,10 +10,22 @@ provider:
   runtime: nodejs14.x
   stage: dev
   region: eu-west-1
+  http:
+    cors:
+      allowedOrigins:
+        - "*"
+        - https://d24x30dkm4m2rb.cloudfront.net/
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+        - authorization
+      allowedMethods:
+        - GET
+        - OPTIONS
+        - PUT
   apiGateway:
-    minimumCompressionSize: 1024 #Enable gzip compression for responses > 1 KB
+    minimumCompressionSize: 1024
     shouldStartNameWithService: true
-
   iamRoleStatements:
     - Effect: "Allow"
       Action: "s3:ListBucket"
@@ -32,7 +41,8 @@ provider:
       Resource:
         - Fn::GetAtt: [SQSQueue, Arn]
   environment:
-    SQS_URL: { Ref: SQSQueue } 
+    SQS_URL: { Ref: SQSQueue }
+
 resources:
   Resources:
     SQSQueue:
@@ -47,6 +57,7 @@ functions:
       - http:
           path: /import
           method: GET
+          cors: true
           request:
             parameters:
               querystrings:

@@ -51,6 +51,10 @@ export const importFileParser = async (event) => {
   }
 
   return {
-    statusCode: 202,
+    statusCode: 201,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "ContentType": "text/csv",
+    },
   };
 };
