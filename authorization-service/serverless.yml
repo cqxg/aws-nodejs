@@ -1,0 +1,26 @@
+service: authorization-service
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+frameworkVersion: '3'
+plugins:
+  - serverless-webpack  
+  - serverless-dotenv-plugin
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: eu-west-1
+functions:
+  basicAuthorizer:
+      handler: basicAuthorizer.basicAuthorizer
+      events:
+        - http:
+            path: token
+            method: get
+            cors: true
+            authorizer:
+              name: importAuthorizer
+              arn: arn:aws:lambda:eu-west-1:408257343489:function:authorization-service-dev-basicAuthorizer
+              resultTtInSeconds: 0
+              identitySource: method.request.header.Authorization
+              type: token

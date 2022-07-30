@@ -15,16 +15,23 @@ export const importProductsFile = async (event) => {
 
     const signedUrl = s3.getSignedUrl("putObject", command);
 
+    console.log(signedUrl)
+
     return {
       statusCode: 201,
-      headers: { "Access-Control-Allow-Origin": "*" },
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type, Accept",
+        "Access-control-request-headers": "authorization",
+      },
       body: JSON.stringify(signedUrl),
     };
   } catch (error) {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        message: "Something broken! Sorry. Error: " + error,
+        message: "Something broken! Sorry. Error: " + error.message,
       }),
     };
   }
