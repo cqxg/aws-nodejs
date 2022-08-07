@@ -19,11 +19,11 @@ provider:
   name: aws
   runtime: nodejs12.x
   environment:
-    PG_HOST: PG__HOST
-    PG_PORT: PG_PORT
-    PG_DATABASE: PG_DATABASE
-    PG_USERNAME: PG_USERNAME
-    PG_PASSWORD: PG_PASSWORD
+    PG_HOST: lesson4-instance.ci0aewu0w10l.eu-west-1.rds.amazonaws.com
+    PG_PORT: 5432
+    PG_DATABASE: lesson4
+    PG_USERNAME: postgres
+    PG_PASSWORD: 90dU29doyN1mviCLzybh
     SNS_ARN: { Ref: SNSTopic }
   stage: dev
   region: eu-west-1
@@ -36,6 +36,9 @@ provider:
         - Authorization
       allowedMethods:
         - GET
+        - POST
+        - PUT
+        - DELETE
   iamRoleStatements:
     - Effect: "Allow"
       Action:
@@ -52,16 +55,23 @@ resources:
       Type: AWS::SNS::Topic
       Properties:
         TopicName: product-service-topic-cqxg
-    SNSSubscriptionFiltered:
+    SNSSubscription:
       Type: AWS::SNS::Subscription
       Properties:
         Endpoint: ihar.o.ivaniuk@gmail.com
         Protocol: email
         TopicArn:
           Ref: SNSTopic
+    SNSSubscriptionFiltered:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: cqxg@yandex.ru
+        Protocol: email
+        TopicArn:
+          Ref: SNSTopic
         FilterPolicy:
           image:
-            - "true"
+            - true
 
 functions:
   connectToDb:
