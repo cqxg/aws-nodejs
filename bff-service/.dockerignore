@@ -1,0 +1,20 @@
+# do not need on prod
+node_modules
+
+# do not need on prod
+logs
+*.log
+pids
+*.pid
+*.seed
+
+# do not need on prod
+Dockerfile
+.dockerignore
+
+# do not need on prod
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
+# do not need on prod
+npm-debug.log
